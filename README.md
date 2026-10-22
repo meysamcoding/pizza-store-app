@@ -2,6 +2,27 @@
 
 A full-stack pizza ordering app with a responsive React storefront and an Express API. Includes six pizzas, category and ingredient search, a persistent cart, delivery or pickup checkout, and saved order receipts.
 
+## Live practice demo on GitHub Pages
+
+The repository includes a separate static practice build for GitHub Pages. It loads the menu from a generated JSON file, supports search and a persistent cart, and disables checkout. It needs no running server or database and never submits orders or collects customer details.
+
+To enable publishing in GitHub, open **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**. The `Deploy practice demo to GitHub Pages` workflow publishes pushes to `main`; it can also be started from **Actions → Deploy practice demo to GitHub Pages → Run workflow**.
+
+After a successful deployment, the practice site is available at:
+
+**https://meysamcoding.github.io/pizza-store-app/**
+
+Build and test that same static site locally:
+
+```sh
+npm run build:pages
+npm run preview:pages
+# Or run the three automated static-site browser tests:
+npm run test:pages
+```
+
+The preview serves the repository subpath `/pizza-store-app/` on port 4174. `.env.pages` contains only the public build flag that enables demo mode. `dist-pages/` is generated and excluded from Git; GitHub Actions uploads only this directory. The standard development and production commands below continue to use the full backend.
+
 ## Run locally
 
 Requires **Node.js 24 or newer** and npm. No API keys, external database, or environment variables are required.

@@ -17,6 +17,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 body { margin: 0; min-width: 320px; }
+.demo-banner { padding: 11px 20px; text-align: center; background: #eae5c9; color: #596247; font-size: 11px; line-height: 1.6; border-bottom: 1px solid #d9d8bc; }
 button, input, textarea { font: inherit; }
 button, a, input, textarea { -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }

@@ -11,9 +11,12 @@
     "dev:api": "node --watch server/index.js",
     "dev:web": "vite --host 0.0.0.0",
     "build": "tsc --noEmit && vite build",
+    "build:pages": "tsc --noEmit && vite build --mode pages --base=/pizza-store-app/ --outDir=dist-pages && node scripts/build-pages.mjs",
+    "preview:pages": "node scripts/serve-pages.mjs",
     "start": "NODE_ENV=production node server/index.js",
     "test": "node --test tests/*.test.js",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:pages": "playwright test --config playwright.pages.config.ts"
   },
   "dependencies": {
     "express": "5.3.0",

@@ -40,8 +40,11 @@ type FormFields = {
   address: string;
   notes: string;
 };
-const CART_KEY = "forno-cart-v1";
-const MODE_KEY = "forno-fulfillment-v1";
+const DEMO_MODE = import.meta.env.VITE_PAGES_DEMO === "true";
+const assetUrl = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+const CART_KEY = DEMO_MODE ? "forno-pages-cart-v1" : "forno-cart-v1";
+const MODE_KEY = DEMO_MODE ? "forno-pages-fulfillment-v1" : "forno-fulfillment-v1";
 const ORDER_KEY = "forno-latest-order-v1";
 const formatMoney = (amount: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
@@ -226,9 +229,14 @@ export default function App() {
   useEffect(() => {
     const controller = new AbortController();
     setMenuError("");
-    api<MenuResponse>("/api/menu", { signal: controller.signal })
+    api<MenuResponse>(DEMO_MODE ? assetUrl("demo-menu.json") : "/api/menu", {
+      signal: controller.signal,
+    })
       .then((data) => {
-        setMenu(data);
+        setMenu({
+          ...data,
+          items: data.items.map((item) => ({ ...item, image: assetUrl(item.image) })),
+        });
         setCart((current) =>
           Object.fromEntries(
             Object.entries(current).filter(([id]) =>
@@ -376,7 +384,7 @@ export default function App() {
   }
 
   async function trackOrder() {
-    if (!latestOrderId) return;
+    if (DEMO_MODE || !latestOrderId) return;
     setPanel("tracking");
     setTrackingLoading(true);
     setRequestError("");
@@ -407,7 +415,7 @@ export default function App() {
 
   async function submitOrder(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submittingRef.current || !cartItems.length) return;
+    if (DEMO_MODE || submittingRef.current || !cartItems.length) return;
     const errors: Partial<Record<keyof FormFields, string>> = {};
     if (fields.name.trim().length < 2) errors.name = "Please enter your name.";
     const phoneDigits = fields.phone.replace(/\D/g, "").length;
@@ -509,6 +517,11 @@ export default function App() {
   return (
     <>
       <div className="site-shell" ref={shellRef}>
+        {DEMO_MODE && (
+          <div className="demo-banner" role="note">
+            <span>Practice site · Explore the menu and cart. No real orders.</span>
+          </div>
+        )}
         <header className="site-header section-shell">
           <a className="brand" href="#" aria-label="Forno home">
             <span className="brand-icon">
@@ -524,7 +537,7 @@ export default function App() {
           </nav>
           <div className="header-actions">
             <ModeSwitch value={mode} onChange={setMode} />
-            {latestOrderId && (
+            {!DEMO_MODE && latestOrderId && (
               <button
                 type="button"
                 className="track-button"
@@ -589,7 +602,7 @@ export default function App() {
             <div className="hero-visual">
               <div className="hero-photo">
                 <img
-                  src="/images/hero.svg"
+                  src={assetUrl("images/hero.svg")}
                   alt="Freshly baked pizza with basil and melted mozzarella"
                   fetchPriority="high"
                 />
@@ -1021,15 +1034,19 @@ export default function App() {
                       <button
                         type="button"
                         className="checkout-button"
+                        disabled={DEMO_MODE}
                         onClick={() => {
                           setPanel("checkout");
                           setRequestError("");
                         }}
                       >
-                        Continue to checkout <ArrowRight size={19} />
+                        {DEMO_MODE ? "Checkout unavailable in demo" : "Continue to checkout"}
+                        {!DEMO_MODE && <ArrowRight size={19} />}
                       </button>
                       <p className="checkout-note">
-                        Fresh pizza. Easy checkout. Happy you.
+                        {DEMO_MODE
+                          ? "This practice site does not collect details or place orders."
+                          : "Fresh pizza. Easy checkout. Happy you."}
                       </p>
                     </div>
                   </>
