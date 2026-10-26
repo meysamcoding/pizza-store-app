@@ -6,6 +6,10 @@ A full-stack pizza ordering app with a responsive React storefront and an Expres
 
 The repository includes a separate static practice build for GitHub Pages. It loads the menu from a generated JSON file, supports search and a persistent cart, and disables checkout. It needs no running server or database and never submits orders or collects customer details.
 
+The frontend now includes dedicated **About us** (`#/about`) and **Contact us** (`#/contact`) pages, mobile navigation, footer links, and FAQs in the existing Forno design. The Contact form validates inputs and displays a local message preview; it does not send messages or save contact details. These pages work on refresh under the GitHub Pages project path.
+
+See [the frontend review and improvement plan](docs/FRONTEND_REVIEW.md) for the original feature inventory, the scope of these additions, and recommended next steps.
+
 To enable publishing in GitHub, open **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**. The `Deploy practice demo to GitHub Pages` workflow publishes pushes to `main`; it can also be started from **Actions → Deploy practice demo to GitHub Pages → Run workflow**.
 
 After a successful deployment, the practice site is available at:
@@ -17,7 +21,7 @@ Build and test that same static site locally:
 ```sh
 npm run build:pages
 npm run preview:pages
-# Or run the three automated static-site browser tests:
+# Or run the automated static-site browser tests:
 npm run test:pages
 ```
 

@@ -12,6 +12,7 @@ import {
   Heart,
   Leaf,
   MapPin,
+  Menu,
   Minus,
   Plus,
   Search,
@@ -29,6 +30,11 @@ import type {
   OrderResponse,
   Pizza,
 } from "./types";
+import { usePageRoute } from "./hooks/usePageRoute";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import FAQ from "./components/FAQ";
+import "./pages/pages.css";
 
 type Cart = Record<string, number>;
 type Panel = "cart" | "checkout" | "confirmation" | "tracking" | null;
@@ -191,6 +197,12 @@ function PizzaCard({
 }
 
 export default function App() {
+  const { page, hash } = usePageRoute();
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const navigationButtonRef = useRef<HTMLButtonElement>(null);
+  const mainRef = useRef<HTMLElement>(null);
+  const previousPageRef = useRef(page);
   const [menu, setMenu] = useState<MenuResponse | null>(null);
   const [menuError, setMenuError] = useState("");
   const [menuAttempt, setMenuAttempt] = useState(0);
@@ -225,6 +237,55 @@ export default function App() {
   const restoreFocusRef = useRef<HTMLElement | null>(null);
   const submittingRef = useRef(false);
   const panelOpen = panel !== null;
+
+  useEffect(() => {
+    setMobileNavOpen(false);
+    const titles = {
+      home: "Forno — Good pizza. Great company.",
+      about: "About us — Forno",
+      contact: "Contact us — Forno",
+    };
+    document.title = titles[page];
+    const descriptions = {
+      home: "Meet your next favorite pizza. Explore the Forno menu and find your favorite flavor.",
+      about: "Meet Forno: simple ingredients, patient dough, and pizza made for good company.",
+      contact: "Have a question about Forno? Explore common questions and preview a message on our practice site.",
+    };
+    document.querySelector('meta[name="description"]')?.setAttribute("content", descriptions[page]);
+    const changedPage = previousPageRef.current !== page;
+    previousPageRef.current = page;
+    const frame = window.requestAnimationFrame(() => {
+      if (changedPage) mainRef.current?.focus({ preventScroll: true });
+      const anchor = hash.slice(1);
+      if (page === "home" && ["menu", "story", "faq"].includes(anchor)) {
+        document.getElementById(anchor)?.scrollIntoView({ behavior: "instant" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [hash, page]);
+
+  useEffect(() => {
+    if (!mobileNavOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileNavOpen(false);
+        navigationButtonRef.current?.focus();
+      }
+    };
+    const closeOutside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !headerRef.current?.contains(event.target)) {
+        setMobileNavOpen(false);
+      }
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    document.addEventListener("pointerdown", closeOutside);
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("pointerdown", closeOutside);
+    };
+  }, [mobileNavOpen]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -376,6 +437,10 @@ export default function App() {
 
   function browseMenu() {
     setPanel(null);
+    if (window.location.hash !== "#menu") {
+      window.location.hash = "menu";
+      return;
+    }
     window.setTimeout(
       () =>
         document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" }),
@@ -517,23 +582,35 @@ export default function App() {
   return (
     <>
       <div className="site-shell" ref={shellRef}>
+        <a
+          href="#main-content"
+          className="skip-link"
+          onClick={(event) => {
+            event.preventDefault();
+            mainRef.current?.focus();
+            mainRef.current?.scrollIntoView({ behavior: "instant" });
+          }}
+        >
+          Skip to content
+        </a>
         {DEMO_MODE && (
           <div className="demo-banner" role="note">
             <span>Practice site · Explore the menu and cart. No real orders.</span>
           </div>
         )}
-        <header className="site-header section-shell">
-          <a className="brand" href="#" aria-label="Forno home">
+        <header className="site-header section-shell" ref={headerRef}>
+          <a className="brand" href="#/" aria-label="Forno home">
             <span className="brand-icon">
               <UtensilsCrossed size={21} />
             </span>
             forno<span className="brand-dot">.</span>
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
-            <a className="nav-active" href="#menu">
+            <a className={page === "home" ? "nav-active" : ""} href="#menu" aria-current={page === "home" ? "page" : undefined}>
               Our menu
             </a>
-            <a href="#story">Our story</a>
+            <a className={page === "about" ? "nav-active" : ""} href="#/about" aria-current={page === "about" ? "page" : undefined}>About us</a>
+            <a className={page === "contact" ? "nav-active" : ""} href="#/contact" aria-current={page === "contact" ? "page" : undefined}>Contact us</a>
           </nav>
           <div className="header-actions">
             <ModeSwitch value={mode} onChange={setMode} />
@@ -550,17 +627,41 @@ export default function App() {
             <button
               type="button"
               className="cart-trigger"
-              onClick={() => setPanel("cart")}
+              onClick={() => {
+                setMobileNavOpen(false);
+                setPanel("cart");
+              }}
               aria-label={`Open your order, ${itemCount} ${itemCount === 1 ? "item" : "items"}`}
             >
               <ShoppingBag size={18} />
               <span>Cart</span>
               <span className="cart-count">{itemCount}</span>
             </button>
+            <button
+              type="button"
+              className="mobile-nav-toggle"
+              ref={navigationButtonRef}
+              aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"}
+              aria-expanded={mobileNavOpen}
+              aria-controls="mobile-navigation"
+              onClick={() => setMobileNavOpen((open) => !open)}
+            >
+              {mobileNavOpen ? <X size={21} /> : <Menu size={21} />}
+            </button>
           </div>
+          {mobileNavOpen && (
+            <nav className="mobile-navigation" id="mobile-navigation" aria-label="Mobile navigation">
+              <a href="#menu" aria-current={page === "home" ? "page" : undefined} onClick={() => setMobileNavOpen(false)}>Our menu <ArrowRight size={17} /></a>
+              <a href="#/about" aria-current={page === "about" ? "page" : undefined} onClick={() => setMobileNavOpen(false)}>About us <ArrowRight size={17} /></a>
+              <a href="#/contact" aria-current={page === "contact" ? "page" : undefined} onClick={() => setMobileNavOpen(false)}>Contact us <ArrowRight size={17} /></a>
+              <a href="#faq" onClick={() => setMobileNavOpen(false)}>Good to know <ArrowRight size={17} /></a>
+              <p>A little slice of the good life.</p>
+            </nav>
+          )}
         </header>
 
-        <main>
+        <main id="main-content" ref={mainRef} tabIndex={-1}>
+          {page === "home" ? <>
           <section
             className="hero section-shell"
             aria-labelledby="hero-heading"
@@ -815,6 +916,7 @@ export default function App() {
                 A familiar favorite, with a little something special.
               </p>
               <span className="story-signoff">See you around the table.</span>
+              <a className="text-link story-more" href="#/about">Get to know us <ArrowRight size={17} /></a>
             </div>
             <div className="story-values">
               <div className="story-value">
@@ -855,15 +957,22 @@ export default function App() {
               </div>
             </div>
           </section>
+          <FAQ />
+          </> : page === "about" ? <AboutPage assetUrl={assetUrl} /> : <ContactPage />}
         </main>
         <footer className="site-footer section-shell">
           <div>
-            <a className="brand" href="#">
+            <a className="brand" href="#/" aria-label="Forno home">
               forno<span className="brand-dot">.</span>
             </a>
             <p>Good pizza. Great company.</p>
           </div>
-          <span className="footer-message">A little slice of happiness.</span>
+          <nav className="footer-nav" aria-label="Footer navigation">
+            <a href="#menu">Our menu</a>
+            <a href="#/about">About us</a>
+            <a href="#/contact">Contact us</a>
+            <a href="#faq">FAQ</a>
+          </nav>
           <span className="footer-copyright">
             © {new Date().getFullYear()} Forno. Made with love.
           </span>

@@ -1,0 +1,155 @@
+.content-page { padding-bottom: 65px; }
+.page-intro { padding-top: 62px; padding-bottom: 62px; }
+.page-intro h1 { margin-top: 24px; font-size: clamp(48px, 5.3vw, 74px); font-weight: 800; line-height: 1.06; letter-spacing: -3.8px; }
+.page-intro h1 span { color: var(--red); }
+.page-lead { margin-top: 26px; color: #73766a; font-size: 14px; line-height: 1.9; max-width: 470px; }
+.page-breadcrumb { display: inline-flex; align-items: center; gap: 8px; color: #858775; font-size: 10px; margin-bottom: 36px; }
+.page-breadcrumb:hover { color: var(--red); }
+.about-intro { display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; gap: 65px; }
+.page-inline-note { display: flex; align-items: center; gap: 9px; margin-top: 25px; color: var(--green); font-size: 11px; }
+.about-art { position: relative; padding-top: 20px; }
+.about-art > img { width: 100%; aspect-ratio: 1.08; object-fit: cover; border-radius: 45% 45% 12px 12px; }
+.about-art-label { display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 16px; color: #7f836f; font-size: 10px; }
+.about-art-star { position: absolute; left: -22px; bottom: 19px; color: var(--green); font-size: 65px; line-height: 1; }
+.page-story { display: grid; grid-template-columns: 1fr 1.1fr; gap: 65px; border-top: 1px solid var(--line); padding-top: 52px; padding-bottom: 42px; }
+.page-story h2, .page-ingredients h2, .page-cta h2, .faq-heading h2 { margin-top: 18px; font-size: 39px; font-weight: 750; letter-spacing: -1.7px; line-height: 1.13; }
+.page-story-copy { display: grid; gap: 18px; align-content: center; }
+.page-story-copy p { color: var(--muted); font-size: 13px; line-height: 1.95; }
+.page-values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; padding-bottom: 60px; }
+.page-value-card { position: relative; border: 1px solid var(--line); background: #fcfaf4; border-radius: 10px; padding: 27px; }
+.page-value-icon { display: grid; place-items: center; width: 45px; height: 45px; border-radius: 50%; background: #e9eddd; color: var(--green); margin-bottom: 25px; }
+.page-value-icon svg { width: 22px; height: 22px; }
+.page-value-number { position: absolute; right: 25px; top: 32px; color: #a4a791; font-size: 11px; letter-spacing: 1px; }
+.page-value-card h3 { font-size: 17px; letter-spacing: -.5px; font-weight: 650; }
+.page-value-card p { font-size: 12px; color: var(--muted); line-height: 1.9; margin-top: 12px; }
+.page-ingredients { padding-top: 48px; padding-bottom: 48px; display: grid; grid-template-columns: .85fr 1.15fr; align-items: center; gap: 65px; background: #eeeddf; max-width: 1152px; border-radius: 12px; }
+.page-ingredients-note { background: #e3e8d2; border-radius: 50%; width: 230px; height: 230px; margin: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 17px; color: var(--green); font-size: 11px; line-height: 1.8; letter-spacing: 1.3px; border: 1px dashed #aab993; outline: 9px solid #e3e8d2; }
+.page-ingredients-note svg { width: 36px; height: 36px; }
+.page-ingredients p:not(.eyebrow) { max-width: 420px; margin-top: 20px; font-size: 12px; line-height: 1.9; color: var(--muted); }
+.page-story-link { margin-left: 0; margin-top: 24px; color: var(--green); }
+.page-cta { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-top: 55px; }
+.page-cta h2 { margin-top: 13px; }
+.page-cta .primary-button { white-space: nowrap; }
+.contact-intro { padding-bottom: 42px; }
+.contact-intro .page-lead { max-width: 470px; }
+.contact-layout { display: grid; grid-template-columns: .85fr 1.15fr; align-items: start; gap: 40px; }
+.contact-information { padding: 30px 33px; background: #e9edde; border-radius: 11px; }
+.contact-information-icon { display: grid; place-items: center; color: var(--green); width: 55px; height: 55px; border: 1px solid #c6d0b5; border-radius: 50%; margin-bottom: 22px; }
+.contact-information-icon svg { width: 25px; height: 25px; }
+.contact-information h2 { font-size: 26px; font-weight: 700; letter-spacing: -.9px; }
+.contact-information > p { font-size: 12px; line-height: 1.9; color: #79836a; margin-top: 15px; }
+.contact-information-note { display: flex; align-items: flex-start; gap: 14px; border-top: 1px solid #ced6bf; padding-top: 23px; margin-top: 23px; }
+.contact-information-note > svg { width: 20px; height: 20px; color: var(--green); margin-top: 2px; }
+.contact-information-note h3 { font-size: 13px; font-weight: 650; }
+.contact-information-note p { font-size: 11px; line-height: 1.8; color: #7b856c; margin-top: 7px; }
+.contact-information > .text-link { margin: 24px 0 0; color: var(--green); font-size: 12px; }
+.contact-menu-link { display: flex; align-items: center; gap: 7px; color: #7b856c; font-size: 10px; line-height: 1.6; margin-top: 19px; }
+.contact-form-card { border: 1px solid var(--line); border-radius: 11px; background: #fcfaf4; padding: 32px; }
+.contact-form-heading h2 { margin-top: 15px; font-size: 28px; font-weight: 700; letter-spacing: -1px; }
+.contact-form-heading > p { color: var(--muted); font-size: 11px; line-height: 1.8; margin-top: 10px; }
+.contact-form { margin-top: 25px; display: grid; gap: 20px; }
+.contact-form-row { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 17px; }
+.contact-field { display: grid; gap: 8px; min-width: 0; }
+.contact-field label { font-size: 11px; font-weight: 600; }
+.contact-field input, .contact-field select, .contact-field textarea { width: 100%; max-width: 100%; min-width: 0; border: 1px solid #d7dacb; padding: 12px 13px; border-radius: 5px; background: #fffdf7; color: var(--ink); font: inherit; font-size: 12px; line-height: 1.6; }
+.contact-field textarea { min-height: 132px; resize: vertical; }
+.contact-field input::placeholder, .contact-field textarea::placeholder { color: #9c9f90; }
+.contact-field [aria-invalid="true"] { border-color: #c1634a; }
+.contact-field select:focus-visible { outline: 3px solid #b98236; outline-offset: 4px; }
+.contact-field-error { color: #ae3b26; font-size: 10px; line-height: 1.6; }
+.contact-form-bottom { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+.contact-form-bottom > p { flex: 1; min-width: 140px; max-width: 220px; color: #969986; font-size: 9px; line-height: 1.8; }
+.contact-form-bottom .primary-button { font-size: 12px; gap: 16px; }
+.contact-message-preview { border: 1px solid #ced8be; border-radius: 8px; padding: 22px; margin-top: 28px; background: #edf0e4; overflow-wrap: anywhere; }
+.contact-preview-kicker { display: flex; align-items: center; gap: 7px; color: var(--green); font-size: 8px; font-weight: 700; letter-spacing: 1px; }
+.contact-preview-kicker svg { height: 14px; width: 14px; }
+.contact-message-preview h2 { font-size: 20px; font-weight: 650; letter-spacing: -.5px; margin-top: 12px; line-height: 1.35; }
+.contact-message-preview dl { margin: 18px 0; display: grid; gap: 8px; font-size: 10px; line-height: 1.6; }
+.contact-message-preview dl > div { display: grid; grid-template-columns: 42px 1fr; gap: 8px; }
+.contact-message-preview dt { color: #899479; }
+.contact-message-preview dd { margin: 0; color: #52634a; }
+.contact-preview-message { white-space: pre-wrap; font-size: 12px; color: #57664e; line-height: 1.8; border-top: 1px solid #d1dac4; padding-top: 16px; }
+.contact-preview-note { font-size: 9px; color: #879575; line-height: 1.7; margin-top: 15px; }
+.faq-section { padding-top: 65px; padding-bottom: 12px; display: grid; grid-template-columns: .85fr 1.15fr; gap: 65px; }
+.faq-heading h2 { margin-top: 16px; }
+.faq-heading h2 > span { color: var(--red); }
+.faq-heading > p:last-child { font-size: 12px; line-height: 1.9; color: var(--muted); max-width: 300px; margin-top: 19px; }
+.faq-list { border-top: 1px solid var(--line); }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 17px; padding: 22px 0; font-size: 13px; font-weight: 600; line-height: 1.5; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:focus-visible { outline: 3px solid #b98236; outline-offset: 4px; border-radius: 3px; }
+.faq-item summary svg { color: var(--green); transition: transform .2s; }
+.faq-item[open] summary svg { transform: rotate(45deg); }
+.faq-item > p { max-width: 460px; padding: 0 23px 22px 0; color: var(--muted); font-size: 12px; line-height: 1.9; }
+.faq-compact { margin-bottom: 55px; }
+@media (max-width: 1100px) {
+  .about-intro { gap: 35px; }
+  .page-story, .page-ingredients, .faq-section { gap: 40px; }
+  .page-ingredients { margin-inline: 40px; }
+  .page-ingredients-note { width: 180px; height: 180px; font-size: 9px; }
+  .page-values { gap: 16px; }
+  .page-value-card { padding: 23px; }
+  .contact-layout { gap: 25px; }
+  .contact-information, .contact-form-card { padding: 26px; }
+  .contact-form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 800px) {
+  .content-page { padding-bottom: 45px; }
+  .page-intro { padding-top: 40px; padding-bottom: 42px; }
+  .page-intro h1 { font-size: 53px; letter-spacing: -2.8px; }
+  .about-intro { gap: 30px; }
+  .page-breadcrumb { font-size: 9px; margin-bottom: 25px; }
+  .page-lead { font-size: 12px; margin-top: 20px; }
+  .page-inline-note { font-size: 9px; }
+  .about-art-label { font-size: 8px; }
+  .about-art-star { font-size: 45px; left: -14px; }
+  .page-story { padding-top: 40px; gap: 30px; }
+  .page-story h2, .page-ingredients h2, .page-cta h2, .faq-heading h2 { font-size: 31px; letter-spacing: -1.3px; }
+  .page-story-copy p { font-size: 12px; }
+  .page-values { grid-template-columns: 1fr; gap: 16px; padding-bottom: 40px; }
+  .page-value-card { padding: 24px; }
+  .page-value-icon { margin-bottom: 17px; }
+  .page-value-card p { max-width: 540px; }
+  .page-ingredients { margin-inline: 25px; padding-top: 35px; padding-bottom: 35px; gap: 30px; }
+  .page-ingredients-note { width: 150px; height: 150px; font-size: 7px; gap: 12px; }
+  .page-ingredients-note svg { width: 28px; height: 28px; }
+  .page-ingredients p:not(.eyebrow) { font-size: 11px; }
+  .contact-layout { grid-template-columns: 1fr; gap: 25px; }
+  .contact-information { padding: 27px; }
+  .contact-information-note { padding-top: 18px; margin-top: 18px; }
+  .contact-form-row { grid-template-columns: 1fr 1fr; }
+  .faq-section { padding-top: 45px; gap: 30px; }
+  .faq-heading > p:last-child { font-size: 11px; }
+  .faq-item summary { font-size: 12px; }
+  .faq-item > p { font-size: 11px; }
+}
+@media (max-width: 560px) {
+  .about-intro { grid-template-columns: 1fr; gap: 27px; }
+  .page-intro h1 { font-size: 54px; letter-spacing: -3px; }
+  .page-lead { font-size: 13px; }
+  .page-inline-note { font-size: 10px; }
+  .about-art { max-width: 340px; width: 100%; margin-inline: auto; padding-top: 0; }
+  .about-art > img { aspect-ratio: 1.2; }
+  .about-art-label { font-size: 9px; }
+  .about-art-star { left: -9px; }
+  .page-story { grid-template-columns: 1fr; gap: 22px; padding-bottom: 30px; }
+  .page-story h2, .page-ingredients h2, .page-cta h2, .faq-heading h2 { font-size: 34px; }
+  .page-story-copy { gap: 15px; }
+  .page-ingredients { grid-template-columns: 1fr; margin-inline: 21px; padding: 35px 24px; gap: 35px; }
+  .page-ingredients-note { width: 155px; height: 155px; font-size: 8px; }
+  .page-cta { align-items: flex-start; flex-direction: column; gap: 25px; padding-top: 40px; }
+  .contact-intro h1 { font-size: 47px; letter-spacing: -2.6px; }
+  .contact-information, .contact-form-card { padding: 24px; }
+  .contact-form-heading .eyebrow { font-size: 8px; letter-spacing: 1.6px; }
+  .contact-form-heading h2 { font-size: 26px; }
+  .contact-form-row { grid-template-columns: 1fr; gap: 20px; }
+  .contact-form-bottom { align-items: flex-start; gap: 15px; }
+  .contact-form-bottom > p { max-width: none; width: 100%; flex-basis: 100%; }
+  .contact-form-bottom .primary-button { width: 100%; justify-content: space-between; }
+  .contact-message-preview { padding: 19px; }
+  .contact-message-preview h2 { font-size: 19px; }
+  .faq-section { grid-template-columns: 1fr; gap: 26px; }
+  .faq-heading > p:last-child { max-width: 320px; font-size: 12px; }
+  .faq-item > p { font-size: 12px; }
+}
