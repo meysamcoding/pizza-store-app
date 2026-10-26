@@ -45,6 +45,10 @@ test('mobile navigation opens, dismisses with Escape, and closes after navigatin
   await expect(navigation).toBeHidden();
   await expect(page.getByRole('heading', { level: 1 })).toContainText('A little flour.');
   await toggle.click();
+  await navigation.getByRole('link', { name: /About us/i }).click();
+  await expect(navigation).toBeHidden();
+  await expect(toggle).toBeFocused();
+  await toggle.click();
   await navigation.getByRole('link', { name: /Contact us/i }).click();
   await expect(page).toHaveURL(/#\/contact$/);
   await expect(navigation).toBeHidden();

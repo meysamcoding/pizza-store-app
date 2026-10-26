@@ -4,7 +4,7 @@ A full-stack pizza ordering app with a responsive React storefront and an Expres
 
 ## Live practice demo on GitHub Pages
 
-The repository includes a separate static practice build for GitHub Pages. It loads the menu from a generated JSON file, supports search and a persistent cart, and disables checkout. It needs no running server or database and never submits orders or collects customer details.
+The repository includes a separate static practice build for GitHub Pages. It loads the menu from a generated JSON file, supports search and a persistent cart, and disables checkout. It needs no running server or database and never submits orders or transmits customer details.
 
 The frontend now includes dedicated **About us** (`#/about`) and **Contact us** (`#/contact`) pages, mobile navigation, footer links, and FAQs in the existing Forno design. The Contact form validates inputs and displays a local message preview; it does not send messages or save contact details. These pages work on refresh under the GitHub Pages project path.
 

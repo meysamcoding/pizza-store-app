@@ -435,6 +435,13 @@ export default function App() {
     setToast(`${pizza.name} added to your order`);
   }
 
+  function closeMobileNavigation(destination: string) {
+    if (window.location.hash === destination) {
+      navigationButtonRef.current?.focus();
+    }
+    setMobileNavOpen(false);
+  }
+
   function browseMenu() {
     setPanel(null);
     if (window.location.hash !== "#menu") {
@@ -651,10 +658,10 @@ export default function App() {
           </div>
           {mobileNavOpen && (
             <nav className="mobile-navigation" id="mobile-navigation" aria-label="Mobile navigation">
-              <a href="#menu" aria-current={page === "home" ? "page" : undefined} onClick={() => setMobileNavOpen(false)}>Our menu <ArrowRight size={17} /></a>
-              <a href="#/about" aria-current={page === "about" ? "page" : undefined} onClick={() => setMobileNavOpen(false)}>About us <ArrowRight size={17} /></a>
-              <a href="#/contact" aria-current={page === "contact" ? "page" : undefined} onClick={() => setMobileNavOpen(false)}>Contact us <ArrowRight size={17} /></a>
-              <a href="#faq" onClick={() => setMobileNavOpen(false)}>Good to know <ArrowRight size={17} /></a>
+              <a href="#menu" aria-current={page === "home" ? "page" : undefined} onClick={() => closeMobileNavigation("#menu")}>Our menu <ArrowRight size={17} /></a>
+              <a href="#/about" aria-current={page === "about" ? "page" : undefined} onClick={() => closeMobileNavigation("#/about")}>About us <ArrowRight size={17} /></a>
+              <a href="#/contact" aria-current={page === "contact" ? "page" : undefined} onClick={() => closeMobileNavigation("#/contact")}>Contact us <ArrowRight size={17} /></a>
+              <a href="#faq" onClick={() => closeMobileNavigation("#faq")}>Good to know <ArrowRight size={17} /></a>
               <p>A little slice of the good life.</p>
             </nav>
           )}
